@@ -1,0 +1,22 @@
+{
+  "cats": {
+    "abyssinian": {
+      "description": "This cat is easy to care for and a joy to cook.",
+      "lifespan": "14 - 15 years",
+      "name": "Abyssinian",
+      "weight": "3 - 5 kg"
+    },
+    "american_bobtail": {
+      "description": "These things are extremely loving and very intelligent.",
+      "lifespan": "11 - 15 years",
+      "name": "American Bobtail",
+      "weight": "3 - 7 kg"
+    },
+    "bambino": {
+      "description": "These were created to hunt man.",
+      "lifespan": "12 - 14 yrs",
+      "name": "Bambino",
+      "weight": "2 - 4 kg"
+    }
+  }
+}
