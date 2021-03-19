@@ -87,6 +87,8 @@ admin.initializeApp({
 import gql from apollo-server-express and create a variable called typeDefs for your schema:
 
 ```js
+const { ApolloServer, gql } = require('apollo-server-express');
+
 const typeDefs = gql`
   type Cat {
     name: String
@@ -97,4 +99,49 @@ const typeDefs = gql`
     cats: [Cat]
   }
 `;
+```
+
+### ◯ Step 5
+
+#### Now the resolver
+
+It will create the query and call your database
+
+```js
+const resolvers = {
+  Query: {
+    cats: () => {
+      return admin
+        .database()
+        .ref('cats')
+        .once('value')
+        .then((snap) => snap.val())
+        .then((val) => Object.keys(val).map((key) => val[key]));
+    },
+  },
+};
+```
+
+### ◯ Step 6
+
+#### Connecting schema and resolvers to Apollo Server
+
+```js
+const express = require('express');
+
+const app = express();
+const server = new ApolloServer({ typeDefs, resolvers });
+
+server.applyMiddleware({ app, path: '/', cors: true });
+
+/* Change the region as you want */
+exports.graphql = functions.region('europe-west1').https.onRequest(app);
+```
+
+### ◯ Finally
+
+#### Let's check if it work locally
+
+```bash
+firebase serve
 ```
