@@ -145,3 +145,6 @@ exports.graphql = functions.region('europe-west1').https.onRequest(app);
 ```bash
 firebase serve
 ```
+
+Maybe you'll have to specify the right url
+![screencapture-localhost-5000-gql-test-123-europe-west1-graphql-2021-03-19-14_03_29](https://user-images.githubusercontent.com/58605856/111784674-f70cb880-88bb-11eb-8c2e-d1565a98f0cb.png)
