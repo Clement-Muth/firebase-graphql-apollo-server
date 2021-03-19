@@ -18,4 +18,83 @@ Apollo Client is a comprehensive state management library for JavaScript that en
 
 ## QuickStart
 
-NOTE: I recommand you to know basics of [firebase CLI](https://firebase.google.com/docs/cli) and setting up Node projects.
+NOTE: I recommend you to know basics of [firebase CLI](https://firebase.google.com/docs/cli) and setting up Node projects.
+
+### ◯ Step 1
+
+Create a Firebase project !
+
+You can get the firebase command by installing `firebase tools` globally
+
+```bash
+# npm
+$ sudo npm install -g firebase-tools
+
+# yarn
+$ sudo yarn add firebase-tools -W
+```
+
+```bash
+$ firebase init
+```
+
+Then choose functions and finish the configuration
+
+```bash
+◯ Functions: Configure and deploy Cloud Functions
+```
+
+### ◯ Step 2
+
+#### Install node modules & apollo server express dependencies
+
+Go to your functions directory
+
+```bash
+$ cd functions
+
+# npm
+$ npm install && npm install apollo-server-express express graphql
+
+# yarn
+$ yarn add apollo-server-express express graphql -W
+```
+
+### ◯ Step 3
+
+Let's set up firebase admin
+
+```js
+const admin = require("firebase-admin");
+
+// To generate a private key file for your service account:
+// 1. In the Firebase console, open Settings > Service Accounts.
+// 2. Click Generate New Private Key, then confirm by clicking Generate Key.
+// 3. Add the JSON file in the `functions` directory
+
+const serviceAccount = require('./serviceAccount.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://<DATABASE-NAME>.firebasedatabase.app/',
+});
+```
+
+### ◯ Step 4
+
+#### Construct a gql schema
+
+import gql from apollo-server-express and create a variable called typeDefs for your schema:
+
+```js
+const typeDefs = gql`
+  type Cat {
+    name: String
+    lifespan: String
+  }
+
+  type Query {
+    cats: [Cat]
+  }
+`;
+```
